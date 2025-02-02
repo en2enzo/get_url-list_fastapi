@@ -11,4 +11,4 @@ starlette==0.41.2
 typing_extensions==4.12.2
 uvicorn==0.32.0
 openai==1.59.8
-Crawl4AI==0.4.247
+#Crawl4AI==0.4.247
