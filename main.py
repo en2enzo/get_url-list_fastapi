@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import APIKeyHeader
 import os
-from crawl4ai import AsyncWebCrawler
-
-from openai import OpenAI
-import json
-import time
+#from crawl4ai import AsyncWebCrawler
+#
+#from openai import OpenAI
+#import json
+#import time
 
 #app = FastAPI()
 
