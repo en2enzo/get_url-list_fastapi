@@ -35,6 +35,76 @@ app = FastAPI(
 )
 
 
+async def get_content_crawl(url):
+#def get_urls_crawl(url):
+    async with AsyncWebCrawler(verbose=False) as crawler:
+        result = await crawler.arun(
+            url=url,
+            verbose=False,
+            headless=True
+        )
+        #return result.markdown
+        #for item in result.links['internal']:
+        #    print("--------bc-------------")
+        #    print(item['text'],item['href'])
+        #    print("##" + item['text'])
+
+        ans = result.markdown
+
+        return ans
+
+async def get_urls_crawl(url):
+#def get_urls_crawl(url):
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(
+
+            url=url
+        )
+        #return result.markdown
+        #for item in result.links['internal']:
+        #    print("--------bc-------------")
+        #    print(item['text'],item['href'])
+        #    print("##" + item['text'])
+
+        ans = result.links['internal']
+
+        #print(type(url))
+        return ans
+    #print("aaa")
+
+
+####################
+### Get
+####################
+
+
 @app.get("/")
 async def get_hello():
     return {"message": "Hello World5"}
+
+@app.get("/crawl")
+async def crawl_url(url: str):
+    try:
+        content = await get_content_crawl(url)
+        return {"content": content}
+        #return url
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"クロール中にエラーが発生しました: {str(e)}"
+        )
+
+@app.get("/crawl_urls")
+async def crawl_urls(url: str):
+    try:
+        urls = await get_urls_crawl(url)
+        return {"urls": urls}
+        #print(type(urls))
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+            detail=f"クロール中にエラーが発生しました: {str(e)}"
+        )
+
+
