@@ -65,11 +65,18 @@ async def get_urls_crawl(url):
         #    print("--------bc-------------")
         #    print(item['text'],item['href'])
         #    print("##" + item['text'])
-
+        print(type(result))
         ans = result.links['internal']
+        list = []
+        for item in ans:
+            #print(item['text'],item['href'])
+            list.append(item['href'])
+        #ans = result.links['internal'][:3]
+        #ans = result.links['internal'][:100]
+        print(type(ans))
 
-        #print(type(url))
-        return ans
+        #return ans
+        return list
     #print("aaa")
 
 
@@ -98,7 +105,8 @@ async def crawl_url(url: str):
 async def crawl_urls(url: str):
     try:
         urls = await get_urls_crawl(url)
-        return {"urls": urls}
+        #return {"urls": urls}
+        return urls
         #print(type(urls))
 
     except Exception as e:
