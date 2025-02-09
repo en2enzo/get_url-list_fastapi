@@ -49,7 +49,8 @@ async def get_content_crawl(url):
         #    print(item['text'],item['href'])
         #    print("##" + item['text'])
 
-        ans = result.markdown
+        #ans = result.markdown
+        ans = result.markdown_v2
 
         return ans
 
