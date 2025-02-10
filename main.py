@@ -31,7 +31,13 @@ prune_filter = PruningContentFilter(
 )
 
 # Step 2: Insert it into a Markdown Generator
-md_generator = DefaultMarkdownGenerator(content_filter=prune_filter)
+#md_generator = DefaultMarkdownGenerator(content_filter=prune_filter)
+md_generator = DefaultMarkdownGenerator(
+       options={
+           "ignore_links": True,
+           "escape_html": False,
+           }
+)
 
 # Step 3: Pass it to CrawlerRunConfig
 config = CrawlerRunConfig(
